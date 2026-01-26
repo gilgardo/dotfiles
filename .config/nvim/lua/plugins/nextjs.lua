@@ -6,6 +6,34 @@ return {
   -- Tailwind CSS support (autocomplete, color preview, class sorting)
   { import = "lazyvim.plugins.extras.lang.tailwind" },
 
+  -- Enhanced Tailwind: classRegex for autocomplete in objects/variables
+  -- e.g., { container: "text-blue-500" } or const styles = "flex items-center"
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        tailwindcss = {
+          settings = {
+            tailwindCSS = {
+              experimental = {
+                classRegex = {
+                  -- Matches: className="...", class="..."
+                  { "class(?:Name)?\\s*=\\s*[\"'`]([^\"'`]*)" },
+                  -- Matches: { key: "..." } in objects
+                  { "[:\\s][\"'`]([^\"'`]*)[\"'`]" },
+                  -- Matches: tw`...` or tw("...")
+                  { "tw\\s*[`(]([^`]*)[`)]" },
+                  -- Matches: clsx("..."), cn("..."), cva("...")
+                  { "(?:clsx|cn|cva)\\s*\\(([^)]*)\\)" },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+
   -- JSON support (for package.json, tsconfig.json, etc.)
   { import = "lazyvim.plugins.extras.lang.json" },
 
