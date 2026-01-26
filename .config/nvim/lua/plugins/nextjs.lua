@@ -20,7 +20,6 @@ return {
         "html",
         "css",
         "json",
-        "jsonc",
         "markdown",
         "markdown_inline",
       })
@@ -29,7 +28,7 @@ return {
 
   -- Mason: ensure LSP servers and formatters are installed
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         -- TypeScript/JavaScript
